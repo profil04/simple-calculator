@@ -88,9 +88,11 @@ export default class App extends React.Component {
               operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) + Number(this.state.secondParameter),
+                /*
                 history: history.concat([{
                   operations: operations
                 }]),
+                */
               })
               operations[4] = this.state.result;
               break;
@@ -100,9 +102,11 @@ export default class App extends React.Component {
               operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) - Number(this.state.secondParameter),
+                /*
                 history: history.concat([{
                   operations: operations
                 }]),
+                */
               })
               operations[4] = this.state.result;
               break;
@@ -112,9 +116,11 @@ export default class App extends React.Component {
               operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) * Number(this.state.secondParameter),
+                /*
                 history: history.concat([{
                   operations: operations
                 }]),
+                */
               })
               operations[4] = this.state.result;
               break;
@@ -124,9 +130,11 @@ export default class App extends React.Component {
               operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) / Number(this.state.secondParameter),
+                /*
                 history: history.concat([{
                   operations: operations
                 }]),
+                */
               })
               operations[4] = this.state.result;
               break;
@@ -154,6 +162,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.history);
     const history = this.state.history;
     const current = history[this.state.stepNumber];
 
