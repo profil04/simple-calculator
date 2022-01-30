@@ -1,0 +1,61 @@
+button {
+  width: 100px;
+  height: 100px;
+}
+
+.calculatorContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "button1 button2 button3 buttonDivide"
+    "button4 button5 button6 buttonMultiple"
+    "button7 button8 button9 buttonSubtract"
+    "button0 button0 buttonEquals buttonAdd";
+}
+.buttonSubtract {
+  grid-area: buttonSubtract;
+}
+.buttonEquals {
+  grid-area: buttonEquals;
+}
+.button0 {
+  grid-area: button0;
+}
+.button7 {
+  grid-area: button7;
+}
+.button8 {
+  grid-area: button8;
+}
+.button9 {
+  grid-area: button9;
+}
+.button6 {
+  grid-area: button6;
+}
+.button3 {
+  grid-area: button3;
+}
+.button2 {
+  grid-area: button2;
+}
+.button5 {
+  grid-area: button5;
+}
+.button4 {
+  grid-area: button4;
+}
+.button1 {
+  grid-area: button1;
+}
+.buttonAdd {
+  grid-area: buttonAdd;
+}
+.buttonDivide {
+  grid-area: buttonDivide;
+}
+.buttonMultiple {
+  grid-area: buttonMultiple;
+}
