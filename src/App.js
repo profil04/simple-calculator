@@ -8,17 +8,17 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       history: [{
-        operations: Array(5).fill(null)
+        param1: 0,
+        sign: "",
+        param2: 0,
+        result: 0,
       }],
-      firstIsNext: true,
-      firstParameter: "",
-      secondParameter: "",
-      operationSign: "",
-      result: 0,
-      stepNumber: 0,
     }
   }
 
+
+
+/*
   handleClick(i) {
     const firstParameter = this.state.firstParameter;
     const secondParameter = this.state.secondParameter;
@@ -116,38 +116,17 @@ export default class App extends React.Component {
       })
     }
   }
-
+*/
+/*
   jumpTo(step) {
-    const firstParameter = this.state.firstParameter;
-    const history = this.state.history;
-    const current = history[history.length - 1];
-    const operations = current.operations.slice();
-    this.setState({
-      stepNumber: step,
-      firstIsNext: true,
-      firstParameter: operations[0],
-      operationSign: operations[1],
-      secondParameter: operations[2],
-      result: operations[4],
-    });
   }
-
+*/
   render() {
-
-    console.log(this.state.history);
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-    const operations = current.operations.slice();
-
+    /*
     const actions = history.map((step, action) => {
       const desc = action ?
         'Go to ' + step.operations:
         'Go to start';
-      
-        console.log(history);
-        console.log(history.operations);
-        //console.log(history.operations[0]);
-        //console.log(history.operations[1]);
 
       return (
         <li key={action}>
@@ -161,14 +140,13 @@ export default class App extends React.Component {
     console.log(history.operations[0]);
     console.log(history.operations[1]);
     */
+
+
+
+
+
     return (
-      <div>
-      <Calculator
-        onClick={(i) => this.handleClick(i)}
-        result={this.state.result}
-      />
-      <ol>{actions}</ol>
-      </div>
+      <Calculator/>
     );
   }
 }
