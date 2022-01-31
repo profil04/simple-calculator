@@ -21,23 +21,27 @@ export default class App extends React.Component {
 
   handleClick(i) {
     const firstParameter = this.state.firstParameter;
-    const history = this.state.history;
+    const secondParameter = this.state.secondParameter;
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const operations = current.operations.slice();
 
     if (i >= 0 && i <= 9) {
-      this.setState({
-        firstParameter: firstParameter + String(i)
-      })
+      if(this.state.firstIsNext){
+        this.setState({
+          firstParameter: firstParameter + String(i)
+        })
+      }else{
+        this.setState({
+          secondParameter: secondParameter + String(i)
+        })
+      }
     } else {
       switch (i) {
         case 10:
           operations[0] = this.state.firstParameter;
           if (this.state.firstIsNext) {
             this.setState({
-              history: history.concat([{
-                operations: operations
-              }]),
               firstIsNext: false,
               operationSign: '+'
             })
@@ -47,9 +51,6 @@ export default class App extends React.Component {
           operations[0] = this.state.firstParameter;
           if (this.state.firstIsNext) {
             this.setState({
-              history: history.concat([{
-                operations: operations
-              }]),
               firstIsNext: false,
               operationSign: '-'
             })
@@ -59,9 +60,6 @@ export default class App extends React.Component {
           operations[0] = this.state.firstParameter;
           if (this.state.firstIsNext) {
             this.setState({
-              history: history.concat([{
-                operations: operations
-              }]),
               firstIsNext: false,
               operationSign: '*'
             })
@@ -71,78 +69,51 @@ export default class App extends React.Component {
           operations[0] = this.state.firstParameter;
           if (this.state.firstIsNext) {
             this.setState({
-              history: history.concat([{
-                operations: operations
-              }]),
               firstIsNext: false,
               operationSign: '/'
             })
           }
           break;
         case 14:
-          operations[3] = this.state.firstParameter;
           switch (this.state.operationSign) {
             case '+':
-              operations[0] = this.state.firstParameter;
-              operations[1] = this.state.operationSign;
-              operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) + Number(this.state.secondParameter),
-                /*
-                history: history.concat([{
-                  operations: operations
-                }]),
-                */
               })
-              operations[4] = this.state.result;
               break;
             case '-':
-              operations[0] = this.state.firstParameter;
-              operations[1] = this.state.operationSign;
-              operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) - Number(this.state.secondParameter),
-                /*
-                history: history.concat([{
-                  operations: operations
-                }]),
-                */
               })
-              operations[4] = this.state.result;
               break;
             case '*':
-              operations[0] = this.state.firstParameter;
-              operations[1] = this.state.operationSign;
-              operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) * Number(this.state.secondParameter),
-                /*
-                history: history.concat([{
-                  operations: operations
-                }]),
-                */
               })
-              operations[4] = this.state.result;
               break;
             case '/':
-              operations[0] = this.state.firstParameter;
-              operations[1] = this.state.operationSign;
-              operations[2] = this.state.secondParameter;
               this.setState({
                 result: Number(this.state.firstParameter) / Number(this.state.secondParameter),
-                /*
-                history: history.concat([{
-                  operations: operations
-                }]),
-                */
               })
-              operations[4] = this.state.result;
               break;
           }
           break;
         default:
         // code block
       }
+      operations[0] = this.state.firstParameter;
+      operations[1] = this.state.operationSign;
+      operations[2] = this.state.secondParameter;
+      operations[3] = "=";
+      operations[4] = this.state.result;
+      this.setState({     
+        history: history.concat([{
+          operations: operations
+        }]),
+        stepNumber: history.length,
+        firstParameter: "",
+        secondParameter: ""
+      })
     }
   }
 
@@ -162,21 +133,34 @@ export default class App extends React.Component {
   }
 
   render() {
+
     console.log(this.state.history);
     const history = this.state.history;
     const current = history[this.state.stepNumber];
+    const operations = current.operations.slice();
 
     const actions = history.map((step, action) => {
       const desc = action ?
-        'Go to action #' + action :
-        'Go to game start';
+        'Go to ' + step.operations:
+        'Go to start';
+      
+        console.log(history);
+        console.log(history.operations);
+        //console.log(history.operations[0]);
+        //console.log(history.operations[1]);
+
       return (
         <li key={action}>
           <button onClick={() => this.jumpTo(action)}>{desc}</button>
         </li>
       );
     });
-
+    /*
+    console.log(history);
+    console.log(history.operations);
+    console.log(history.operations[0]);
+    console.log(history.operations[1]);
+    */
     return (
       <div>
       <Calculator

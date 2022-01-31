@@ -18,7 +18,8 @@ export default class Calculator extends Component {
   render() {
     return (
     <div className='calculatorContainer'>
-        <div className='display'>{this.props.result}</div>
+        <input className='calculations' value={this.props.calculation}></input>
+        <input className='display' value={this.props.result}></input>
         <div className='history'></div>
         {this.renderCalculatorButton(1)}
         {this.renderCalculatorButton(2)}
